@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlock Content — Sierria</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="style.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Syne', 'sans-serif'],
+                        body: ['DM Sans', 'sans-serif']
+                    },
+                    colors: {
+                        primary: {
+                            50: '#e0fbfc', 100: '#c2f4f6', 200: '#95e8eb', 300: '#5ad7df', 400: '#2cbcd1',
+                            500: '#139eb5', 600: '#107f98', 700: '#11667b', 800: '#145466', 900: '#144655',
+                        },
+                        ocean: {
+                            900: '#040814',
+                            800: '#0b1528',
+                            700: '#112240',
+                            600: '#1a365d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="text-blue-50 min-h-screen relative overflow-x-hidden flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    
+    <!-- Smooth Canvas Starfield Background -->
+    <canvas id="bgCanvas" class="fixed inset-0 pointer-events-none z-[-2]"></canvas>
+
+    <div class="max-w-md w-full relative z-10">
+        
+        <!-- Glowing Orb Background -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full -z-10 pointer-events-none">
+            <div class="absolute top-0 left-[10%] w-[80%] h-[80%] bg-primary-600/20 rounded-full blur-[80px]"></div>
+        </div>
+
+        <div class="glass rounded-[2rem] border border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.6)] overflow-hidden">
+            
+            <!-- Header -->
+            <div id="unlockHeader" class="text-center border-b border-white/5 bg-ocean-900/40 relative">
+                <!-- Thumbnail Image (Dynamic) -->
+                <div class="w-full h-48 bg-ocean-800/50 relative overflow-hidden">
+                    <img id="mainThumbnail" src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" class="w-full h-full object-cover opacity-80" alt="Unlock Thumbnail">
+                    <div class="absolute inset-0 bg-gradient-to-t from-ocean-900/90 to-transparent"></div>
+                </div>
+                
+                <div class="p-8 pt-4 -mt-10 relative z-10">
+                    <a href="../main page/main-page.html" class="inline-block mb-3 bg-ocean-900/80 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
+                        <img src="../logo.png" alt="Sierria Logo" onerror="this.src='https://via.placeholder.com/100x30/040814/2cbcd1?text=Sierria'" class="h-4 w-auto object-contain mx-auto opacity-80 hover:opacity-100 transition-opacity">
+                    </a>
+                    <h1 id="mainTitle" class="font-display text-2xl font-bold text-white mb-2 drop-shadow-lg">Ultimate Roblox Script</h1>
+                    <p class="text-sm text-blue-200/80">Complete the steps below to verify you are a human and unlock the destination link.</p>
+                </div>
+            </div>
+
+            <!-- Steps Section (Dynamic) -->
+            <div id="dynamicTasksContainer" class="p-8 space-y-4">
+                <!-- Tasks will be rendered here by script.js -->
+            </div>
+
+            <!-- Footer Action -->
+            <div class="p-8 pt-0">
+                <button id="unlockBtn" disabled onclick="unlockContent()" class="w-full bg-ocean-800 text-blue-200/50 px-6 py-4 rounded-xl font-bold text-sm transition-all duration-300 border border-white/5 flex items-center justify-center gap-2 cursor-not-allowed">
+                    <i class="ri-lock-line"></i> Verify Steps to Unlock
+                </button>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="h-1 w-full bg-white/5">
+                <div id="progressBar" class="h-full bg-gradient-to-r from-primary-400 to-primary-600 w-0 transition-all duration-500"></div>
+            </div>
+
+        </div>
+
+        <div class="text-center mt-6">
+             <p class="text-xs text-blue-200/40">Powered by <a href="../main page/main-page.html" class="text-primary-400 hover:underline">Sierria</a></p>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-ocean-900/90 backdrop-blur-md"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="glass border border-emerald-500/30 rounded-3xl p-8 max-w-sm w-full text-center relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-emerald-500"></div>
+                
+                <div class="w-20 h-20 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-4xl mx-auto mb-6 border border-emerald-500/30 shadow-[0_0_20px_rgba(16,185,129,0.2)]">
+                    <i class="ri-lock-unlock-fill"></i>
+                </div>
+                
+                <h2 class="font-display text-2xl font-bold text-white mb-2">Unlocked!</h2>
+                <p class="text-sm text-blue-200/70 mb-6">Thank you for completing the steps. You can now access the destination link.</p>
+                
+                <!-- The Linkvertise Script will automatically intercept this link -->
+                <a id="destinationLink" href="#" target="_blank" class="block w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 rounded-xl transition-colors shadow-[0_0_15px_rgba(16,185,129,0.3)] border border-emerald-400/50">
+                    Go to Destination Link
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

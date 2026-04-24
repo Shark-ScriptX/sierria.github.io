@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Sierria</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="style.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Syne', 'sans-serif'],
+                        body: ['DM Sans', 'sans-serif']
+                    },
+                    colors: {
+                        primary: {
+                            50: '#e0fbfc', 100: '#c2f4f6', 200: '#95e8eb', 300: '#5ad7df', 400: '#2cbcd1',
+                            500: '#139eb5', 600: '#107f98', 700: '#11667b', 800: '#145466', 900: '#144655',
+                        },
+                        ocean: {
+                            900: '#040814',
+                            800: '#0b1528',
+                            700: '#112240',
+                            600: '#1a365d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="text-blue-50 min-h-screen relative overflow-x-hidden">
+    
+    <!-- Smooth Canvas Starfield Background -->
+    <canvas id="bgCanvas" class="fixed inset-0 pointer-events-none z-[-2]"></canvas>
+
+    <!-- Floating Navbar -->
+    <nav id="nav-placeholder" class="sticky top-6 z-50 mx-auto w-fit max-w-[calc(100%-2rem)] glass border border-white/10 rounded-[2rem] shadow-[0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-300"></nav>
+
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="text-center mb-12">
+            <h1 class="font-display text-4xl md:text-5xl font-extrabold text-white mb-4">Support <span class="text-primary-300 drop-shadow-[0_0_15px_rgba(44,188,209,0.5)]">Sierria</span></h1>
+            <p class="text-blue-200/70">Your support helps us keep the servers running and the project ad-free.</p>
+        </div>
+
+        <div class="space-y-8">
+            
+            <!-- Crypto Section -->
+            <div class="glass rounded-3xl p-8 border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)] relative overflow-hidden">
+                <div class="absolute -top-20 -right-20 w-40 h-40 bg-indigo-500/20 rounded-full blur-[50px] pointer-events-none"></div>
+                
+                <h2 class="font-display text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                    <i class="ri-bit-coin-line text-yellow-500"></i> Crypto Donations
+                </h2>
+
+                <div class="space-y-4">
+                    <!-- BTC -->
+                    <div class="crypto-card rounded-2xl p-4 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-orange-500/20 text-orange-400 flex items-center justify-center text-xl border border-orange-500/30">
+                                <i class="ri-btc-line"></i>
+                            </div>
+                            <div>
+                                <p class="text-white font-semibold text-sm">Bitcoin (BTC)</p>
+                                <p class="text-xs text-blue-200/50">Bitcoin Network</p>
+                            </div>
+                        </div>
+                        <div class="flex-1 w-full sm:w-auto sm:ml-4 flex items-center gap-2">
+                            <input type="text" readonly value="bc1qh7harm86plxzpxeuwq0es3zc88tfdh9lgjcchs" class="copy-input w-full rounded-xl px-3 py-2 text-blue-100 text-xs focus:outline-none font-mono">
+                            <button onclick="copyText('bc1qh7harm86plxzpxeuwq0es3zc88tfdh9lgjcchs', this)" class="bg-white/10 hover:bg-white/20 text-white p-2 rounded-xl transition-colors cursor-pointer border border-white/10 flex-shrink-0">
+                                <i class="ri-file-copy-line"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ETH -->
+                    <div class="crypto-card rounded-2xl p-4 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-xl border border-blue-500/30">
+                                <i class="ri-eth-line"></i>
+                            </div>
+                            <div>
+                                <p class="text-white font-semibold text-sm">Ethereum (ETH)</p>
+                                <p class="text-xs text-blue-200/50">ERC-20 Network</p>
+                            </div>
+                        </div>
+                        <div class="flex-1 w-full sm:w-auto sm:ml-4 flex items-center gap-2">
+                            <input type="text" readonly value="0x56b9260e176f0cef75eb1997bcda3e2a9cc0b7cf" class="copy-input w-full rounded-xl px-3 py-2 text-blue-100 text-xs focus:outline-none font-mono">
+                            <button onclick="copyText('0x56b9260e176f0cef75eb1997bcda3e2a9cc0b7cf', this)" class="bg-white/10 hover:bg-white/20 text-white p-2 rounded-xl transition-colors cursor-pointer border border-white/10 flex-shrink-0">
+                                <i class="ri-file-copy-line"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- SOL -->
+                    <div class="crypto-card rounded-2xl p-4 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center text-xl border border-purple-500/30">
+                                <i class="ri-copper-coin-line"></i>
+                            </div>
+                            <div>
+                                <p class="text-white font-semibold text-sm">Solana (SOL)</p>
+                                <p class="text-xs text-blue-200/50">Solana Network</p>
+                            </div>
+                        </div>
+                        <div class="flex-1 w-full sm:w-auto sm:ml-4 flex items-center gap-2">
+                            <input type="text" readonly value="Bz3ezTju2bmDy9TkazXAqzhAnDqrjv596H6CZFz9ZSjp" class="copy-input w-full rounded-xl px-3 py-2 text-blue-100 text-xs focus:outline-none font-mono">
+                            <button onclick="copyText('Bz3ezTju2bmDy9TkazXAqzhAnDqrjv596H6CZFz9ZSjp', this)" class="bg-white/10 hover:bg-white/20 text-white p-2 rounded-xl transition-colors cursor-pointer border border-white/10 flex-shrink-0">
+                                <i class="ri-file-copy-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Roblox Gamepass Section -->
+            <div class="glass rounded-3xl p-8 border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)] relative overflow-hidden">
+                <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-primary-500/20 rounded-full blur-[50px] pointer-events-none"></div>
+                
+                <h2 class="font-display text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                    <i class="ri-gamepad-line text-primary-400"></i> Roblox Gamepass
+                </h2>
+                <p class="text-sm text-blue-200/70 mb-6">Support us directly through Roblox by purchasing our official donation Gamepass.</p>
+                
+                <a href="#" class="w-full bg-white/10 hover:bg-white/15 text-white font-bold py-4 rounded-2xl transition-all border border-white/20 flex items-center justify-center gap-2 group cursor-pointer">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Roblox_player_icon_black.svg" class="w-5 h-5 invert opacity-80 group-hover:opacity-100 transition-opacity" alt="Roblox">
+                    Buy Gamepass in Roblox
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="../Navigation/nav.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css');
+
+html { scroll-behavior: smooth; }
+
+body { 
+    font-family: 'DM Sans', sans-serif; 
+    background-color: #040814;
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(20, 70, 85, 0.15), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(16, 127, 152, 0.15), transparent 25%);
+}
+
+.font-display { font-family: 'Syne', sans-serif; }
+
+.galaxy-bg {
+    background: radial-gradient(circle at top right, #0b1528, #112240, #040814);
+    border: 1px solid rgba(44, 188, 209, 0.2);
+}
+
+.glass {
+    background: rgba(11, 21, 40, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(44, 188, 209, 0.1);
+}
+
+.glass-input {
+    background: rgba(11, 21, 40, 0.8);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-input:focus {
+    border-color: rgba(44, 188, 209, 0.5);
+    box-shadow: 0 0 15px rgba(44, 188, 209, 0.2);
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #040814; }
+::-webkit-scrollbar-thumb { background: #139eb5; border-radius: 3px; }
+
+.fade-in { animation: fadeIn .35s ease forwards; }
+@keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.scale-in { animation: scaleIn .3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Custom Checkbox styles for action selection */
+.custom-checkbox input:checked + div {
+    background-color: #139eb5;
+    border-color: #2cbcd1;
+    box-shadow: 0 0 10px rgba(44, 188, 209, 0.4);
+}
+
+.custom-checkbox input:checked + div i {
+    opacity: 1;
+}

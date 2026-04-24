@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sierria — Premium Social Unlocks</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="style.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Syne', 'sans-serif'],
+                        body: ['DM Sans', 'sans-serif']
+                    },
+                    colors: {
+                        primary: {
+                            50: '#e0fbfc', 100: '#c2f4f6', 200: '#95e8eb', 300: '#5ad7df', 400: '#2cbcd1',
+                            500: '#139eb5', 600: '#107f98', 700: '#11667b', 800: '#145466', 900: '#144655',
+                        },
+                        ocean: {
+                            900: '#040814',
+                            800: '#0b1528',
+                            700: '#112240',
+                            600: '#1a365d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="text-blue-50 min-h-screen relative overflow-x-hidden">
+
+    <!-- Smooth Canvas Starfield Background -->
+    <canvas id="bgCanvas" class="fixed inset-0 pointer-events-none z-[-2]"></canvas>
+
+    <!-- Smooth Cursor Glow Effect -->
+    <div id="cursorGlow"
+        class="fixed top-0 left-0 w-[600px] h-[600px] rounded-full pointer-events-none z-[-1] opacity-30 blur-[120px] bg-primary-600/30 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300">
+    </div>
+
+    <!-- Floating Navbar -->
+    <nav id="nav-placeholder" class="sticky top-6 z-50 mx-auto w-fit max-w-[calc(100%-2rem)] glass border border-white/10 rounded-[2rem] shadow-[0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-300"></nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-24 pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-white/10 text-xs font-semibold text-primary-300 mb-8 fade-in"
+                style="animation-delay: 0.1s;">
+                <span class="w-2 h-2 rounded-full bg-primary-400 animate-pulse"></span>
+                Sierria Link Locker v2.0
+            </div>
+
+            <h1 class="font-display text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight leading-tight fade-in"
+                style="animation-delay: 0.2s;">
+                Monetize & Grow with <br />
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-primary-300 via-cyan-200 to-indigo-300 drop-shadow-[0_0_30px_rgba(44,188,209,0.3)]">Social
+                    Unlocks</span>
+            </h1>
+
+            <p class="text-lg md:text-xl text-blue-200/70 max-w-2xl mx-auto mb-10 leading-relaxed fade-in"
+                style="animation-delay: 0.3s;">
+                Protect your content, scripts, and links behind a beautiful social unlock page. Force users to join your
+                Discord or subscribe to your YouTube channel to gain access.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-5 fade-in"
+                style="animation-delay: 0.4s;">
+                <a href="../join discord/join-discord.html"
+                    class="w-full sm:w-auto bg-primary-600 text-white px-10 py-4 rounded-2xl font-bold text-lg hover:bg-primary-500 transition-all duration-300 shadow-[0_0_30px_rgba(16,127,152,0.5)] hover:shadow-[0_0_40px_rgba(44,188,209,0.7)] flex items-center justify-center gap-2 border border-primary-400/50 hover:-translate-y-1">
+                    Start Generating Links <i class="ri-arrow-right-line"></i>
+                </a>
+                <a href="../get script/get-script.html"
+                    class="w-full sm:w-auto glass text-white px-10 py-4 rounded-2xl font-bold text-lg hover:bg-white/10 transition-all duration-300 border border-white/10 hover:-translate-y-1 flex items-center justify-center gap-2">
+                    <i class="ri-play-circle-line"></i> See Demo
+                </a>
+            </div>
+        </div>
+
+        <!-- Abstract Glowing Orbs behind Hero -->
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full -z-10 pointer-events-none opacity-40">
+            <div
+                class="absolute top-[20%] left-[20%] w-[500px] h-[500px] bg-primary-600 rounded-full blur-[150px] mix-blend-screen animate-pulse duration-[4000ms]">
+            </div>
+            <div
+                class="absolute bottom-[10%] right-[20%] w-[400px] h-[400px] bg-indigo-600 rounded-full blur-[150px] mix-blend-screen animate-pulse duration-[5000ms]">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 relative border-t border-white/5 bg-ocean-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-4">Why Choose Sierria?</h2>
+                <p class="text-blue-200/60 max-w-xl mx-auto">We provide the most premium and reliable social unlocking
+                    experience for content creators.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="glass p-8 rounded-3xl border-white/10 hover:border-primary-500/30 transition-all hover:-translate-y-2 group float"
+                    style="animation-delay: 0s;">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-primary-600/20 text-primary-400 flex items-center justify-center text-3xl mb-6 border border-primary-500/30 group-hover:bg-primary-500 group-hover:text-white group-hover:shadow-[0_0_20px_rgba(44,188,209,0.5)] transition-all">
+                        <i class="ri-speed-up-line"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white mb-3">Lightning Fast</h3>
+                    <p class="text-blue-200/70 text-sm leading-relaxed">Our platform is built for speed. No annoying ads
+                        or captchas, just straight to your requirements and to the destination.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass p-8 rounded-3xl border-white/10 hover:border-indigo-500/30 transition-all hover:-translate-y-2 group float"
+                    style="animation-delay: 0.2s;">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center text-3xl mb-6 border border-indigo-500/30 group-hover:bg-indigo-500 group-hover:text-white group-hover:shadow-[0_0_20px_rgba(99,102,241,0.5)] transition-all">
+                        <i class="ri-user-unfollow-line"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white mb-3">No sign-in required</h3>
+                    <p class="text-blue-200/70 text-sm leading-relaxed">No need to sign in or sign up. Just click and
+                        use.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass p-8 rounded-3xl border-white/10 hover:border-emerald-500/30 transition-all hover:-translate-y-2 group float"
+                    style="animation-delay: 0.4s;">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center text-3xl mb-6 border border-emerald-500/30 group-hover:bg-emerald-500 group-hover:text-white group-hover:shadow-[0_0_20px_rgba(16,185,129,0.5)] transition-all">
+                        <i class="ri-shield-check-line"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white mb-3">Secure Bypass Prevention</h3>
+                    <p class="text-blue-200/70 text-sm leading-relaxed">Advanced checks to ensure users actually
+                        complete the actions before getting access to your locked link.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="glass p-8 rounded-3xl border-white/10 hover:border-amber-500/30 transition-all hover:-translate-y-2 group float"
+                    style="animation-delay: 0.6s;">
+                    <div
+                        class="w-14 h-14 rounded-2xl bg-amber-600/20 text-amber-400 flex items-center justify-center text-3xl mb-6 border border-amber-500/30 group-hover:bg-amber-500 group-hover:text-white group-hover:shadow-[0_0_20px_rgba(245,158,11,0.5)] transition-all">
+                        <i class="ri-gift-line"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-white mb-3">100% Free</h3>
+                    <p class="text-blue-200/70 text-sm leading-relaxed">Because we provide free services. Generate unlimited links without any hidden fees.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-10 text-center">
+        <p class="text-blue-200/40 text-sm">© 2026 Sierria. Redefining Social Unlocks.</p>
+    </footer>
+
+    <script src="../Navigation/nav.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

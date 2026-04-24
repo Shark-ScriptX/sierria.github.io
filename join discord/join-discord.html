@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sierria — Social Unlock Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="style.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['Syne', 'sans-serif'],
+                        body: ['DM Sans', 'sans-serif']
+                    },
+                    colors: {
+                        primary: {
+                            50: '#e0fbfc', 100: '#c2f4f6', 200: '#95e8eb', 300: '#5ad7df', 400: '#2cbcd1',
+                            500: '#139eb5', 600: '#107f98', 700: '#11667b', 800: '#145466', 900: '#144655',
+                        },
+                        ocean: {
+                            900: '#040814',
+                            800: '#0b1528',
+                            700: '#112240',
+                            600: '#1a365d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="text-blue-50 min-h-screen relative overflow-x-hidden">
+    
+    <!-- Smooth Canvas Starfield Background -->
+    <canvas id="bgCanvas" class="fixed inset-0 pointer-events-none z-[-2]"></canvas>
+    
+    <!-- Smooth Cursor Glow Effect -->
+    <div id="cursorGlow" class="fixed top-0 left-0 w-[500px] h-[500px] rounded-full pointer-events-none z-[-1] opacity-40 blur-[100px] bg-primary-600/30 transform -translate-x-1/2 -translate-y-1/2 transition-opacity duration-300"></div>
+
+    <!-- Floating Navbar -->
+    <nav id="nav-placeholder" class="sticky top-6 z-50 mx-auto w-fit max-w-[calc(100%-2rem)] glass border border-white/10 rounded-[2rem] shadow-[0_20px_40px_rgba(0,0,0,0.5)] transition-all duration-300"></nav>
+
+    <!-- Main Generator Section -->
+    <section class="relative z-10 pt-16 pb-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto flex flex-col items-center">
+        
+        <div class="text-center mb-10 w-full">
+            <h1 class="font-display text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight drop-shadow-lg">
+                Create a <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-300 via-cyan-200 to-indigo-300 drop-shadow-[0_0_20px_rgba(44,188,209,0.4)]">Social Unlock</span>
+            </h1>
+            <p class="text-blue-200/70 max-w-2xl mx-auto">
+                Require users to complete actions like joining your Discord or subscribing to your YouTube channel before they can access your destination link.
+            </p>
+        </div>
+
+        <div class="w-full glass rounded-3xl p-6 md:p-10 shadow-[0_0_40px_rgba(0,0,0,0.5)] border border-white/10 relative overflow-hidden">
+            <!-- Subtle glow inside the card -->
+            <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary-600/20 rounded-full blur-[80px] pointer-events-none"></div>
+
+            <form id="generatorForm" class="space-y-8 relative z-10" onsubmit="generateLink(event)">
+                
+                <!-- Step 1: General Details -->
+                <div class="space-y-5">
+                    <div class="flex items-center gap-3 border-b border-white/10 pb-3">
+                        <div class="w-8 h-8 rounded-full bg-primary-600/20 text-primary-400 flex items-center justify-center font-bold text-sm border border-primary-500/30">1</div>
+                        <h2 class="font-display text-xl font-semibold text-white">Unlock Page Details</h2>
+                    </div>
+                    
+                    <p class="text-sm text-blue-200/60">Customize how your unlock page will look.</p>
+                    
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+                            <label class="block text-sm font-medium text-blue-200/90 mb-2">Page Title</label>
+                            <input type="text" id="pageTitle" required class="w-full glass-input rounded-xl px-4 py-3 text-white focus:outline-none transition-all placeholder-blue-200/30" placeholder="e.g., Ultimate Roblox Script">
+                        </div>
+                        <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+                            <label class="block text-sm font-medium text-blue-200/90 mb-2">Thumbnail Image URL (Optional)</label>
+                            <input type="url" id="pageThumbnail" class="w-full glass-input rounded-xl px-4 py-3 text-white focus:outline-none transition-all placeholder-blue-200/30" placeholder="https://example.com/image.png">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Tasks Builder -->
+                <div class="space-y-5">
+                    <div class="flex items-center gap-3 border-b border-white/10 pb-3">
+                        <div class="w-8 h-8 rounded-full bg-primary-600/20 text-primary-400 flex items-center justify-center font-bold text-sm border border-primary-500/30">2</div>
+                        <h2 class="font-display text-xl font-semibold text-white">Tasks Builder</h2>
+                    </div>
+                    
+                    <p class="text-sm text-blue-200/60">Add actions users must complete to unlock the destination.</p>
+                    
+                    <div id="dynamicTasksContainer" class="space-y-4">
+                        <!-- Dynamic tasks will be appended here -->
+                    </div>
+
+                    <button type="button" onclick="addTask()" class="w-full border-2 border-dashed border-white/20 text-blue-200/70 hover:text-white hover:border-primary-400/50 hover:bg-primary-500/10 rounded-2xl p-4 flex items-center justify-center gap-2 transition-all cursor-pointer font-semibold">
+                        <i class="ri-add-line"></i> Add New Task
+                    </button>
+                </div>
+
+                <!-- Step 3: Destination -->
+                <div class="space-y-5">
+                    <div class="flex items-center gap-3 border-b border-white/10 pb-3">
+                        <div class="w-8 h-8 rounded-full bg-primary-600/20 text-primary-400 flex items-center justify-center font-bold text-sm border border-primary-500/30">3</div>
+                        <h2 class="font-display text-xl font-semibold text-white">Destination URL</h2>
+                    </div>
+                    
+                    <p class="text-sm text-blue-200/60">Where should users go after completing the requirements?</p>
+                    
+                    <div>
+                        <input type="url" id="destinationUrl" required class="w-full glass-input rounded-xl px-5 py-4 text-white focus:outline-none transition-all placeholder-blue-200/30 text-lg shadow-inner" placeholder="https://pastebin.com/raw/... or https://mega.nz/...">
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="pt-4">
+                    <button type="submit" id="submitBtn" class="w-full bg-primary-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-primary-500 transition-all duration-300 shadow-[0_0_20px_rgba(16,127,152,0.4)] hover:shadow-[0_0_30px_rgba(44,188,209,0.6)] flex items-center justify-center gap-2 cursor-pointer border border-primary-400/50">
+                        <i class="ri-magic-line"></i> Generate Unlock Link
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Result Modal -->
+    <div id="resultModal" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-ocean-900/90 backdrop-blur-xl transition-opacity" onclick="closeResultModal()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
+            <div class="glass border border-white/20 rounded-3xl shadow-[0_0_60px_rgba(0,0,0,0.8)] max-w-lg w-full p-8 pointer-events-auto scale-in relative overflow-hidden">
+                
+                <!-- Glowing effect behind modal content -->
+                <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-40 bg-emerald-500/20 rounded-full blur-[60px] pointer-events-none"></div>
+
+                <div class="text-center relative z-10 mb-8">
+                    <div class="w-20 h-20 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-4xl mx-auto mb-4 border border-emerald-500/30 shadow-[0_0_20px_rgba(16,185,129,0.2)]">
+                        <i class="ri-check-line"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-3xl text-white drop-shadow-sm mb-2">Link Generated!</h3>
+                    <p class="text-blue-200/70 text-sm">Share this link with your audience. They must complete the actions to access your destination.</p>
+                </div>
+                
+                <div class="bg-ocean-900/50 border border-white/10 rounded-2xl p-2 flex items-center gap-2 mb-8 relative z-10">
+                    <input type="text" id="generatedLink" readonly class="w-full bg-transparent border-none text-white px-4 py-2 focus:outline-none font-medium" value="https://sierria.com/unlock/aB3x9Z">
+                    <button type="button" onclick="copyLink()" id="copyBtn" class="bg-primary-600/80 hover:bg-primary-500 text-white px-4 py-2.5 rounded-xl font-semibold text-sm transition-all flex items-center gap-1.5 flex-shrink-0 cursor-pointer">
+                        <i class="ri-file-copy-line"></i> Copy
+                    </button>
+                </div>
+
+                <div class="flex gap-4 relative z-10">
+                    <button onclick="closeResultModal()" class="w-full bg-white/5 hover:bg-white/10 text-white font-semibold py-3.5 rounded-xl transition-all border border-white/10 cursor-pointer">
+                        Done
+                    </button>
+                    <a href="../get script/get-script.html?preview=1" target="_blank" class="w-full bg-white/5 hover:bg-white/10 text-white font-semibold py-3.5 rounded-xl transition-all border border-white/10 cursor-pointer text-center flex items-center justify-center gap-2">
+                         Preview <i class="ri-external-link-line"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../Navigation/nav.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
